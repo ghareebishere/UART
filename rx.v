@@ -1,27 +1,27 @@
 module uart_rx_fsm (
     input  wire       clk,
     input  wire       rst,
-    input  wire       tick,          // 16× baud tick
-    input  wire       rx,
-    output reg [7:0]  rx_data,
-    output reg        rx_valid,
-    output reg        parity_error,
-    output reg        stop_error
+    input  wire       tick,          //! tick from baude generator
+    input  wire       rx, //! serialized data in
+    output reg [7:0]  rx_data, //! parallel data
+    output reg        rx_valid, //! vaild byte flag
+    output reg        parity_error, //! error check  parity
+    output reg        stop_error //! stop bit error
   );
 
   // FSM States
-  parameter IDLE   = 3'b000;
-  parameter START  = 3'b001;
-  parameter DATA   = 3'b010;
-  parameter PARITY = 3'b011;
+  parameter IDLE   = 3'b000; 
+  parameter START  = 3'b001; //! start bit state 
+  parameter DATA   = 3'b010; //! data bits state
+  parameter PARITY = 3'b011; //! parity in
   parameter STOP   = 3'b100;
-  parameter DONE   = 3'b101;
+  parameter DONE   = 3'b101; //! rise vaild flag, go back to IDLE
 
   reg [2:0] state = IDLE;
-  reg [3:0] sample_count = 0;
+  reg [3:0] sample_count = 0; //!  for the oversampling proccess
   reg [3:0] bit_index = 0;
-  reg [7:0] data_buffer = 0;
-  reg       received_parity;
+  reg [7:0] data_buffer = 0; //! where the recived bits be stored?
+  reg       received_parity; //! wbu recived parity for checking?
 
   always @(posedge clk or posedge rst)
   begin

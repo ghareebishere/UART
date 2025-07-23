@@ -1,7 +1,7 @@
 module baud_gen #(
-    parameter CLK_FREQ = 50000000,
-    parameter BAUD_RATE = 9600,
-    parameter OVERSAMPLE = 1         // 1 for TX, 16 for RX
+    parameter CLK_FREQ = 50000000, //! clk of system
+    parameter BAUD_RATE = 9600, //! parameterized baude rate
+    parameter OVERSAMPLE = 1         //! 1 for TX, 16 for RX as oversampling in TX would be useless
   )(
     input wire clk,
     input wire rst,
