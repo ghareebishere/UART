@@ -6,7 +6,7 @@ parameterized UART protocol implemented as
 - top module to implement all the above as total unit
 
 ## TX
-![Diagram](exports\uart_tx_fsm.svg "TX")
+![](exports\uart_tx_fsm.svg "TX")
 ### ports
 
 | name | Direction | Type       | Description               |
@@ -26,7 +26,7 @@ parameterized UART protocol implemented as
 | bit_index    | reg [3:0] | bit index track                             |
 
 ## RX
-![Diagram](exports\uart_rx_fsm.svg "RX")
+![](exports\uart_rx_fsm.svg "RX")
 ### Ports
 
 | Port name    | Direction | Type  | Description               |
